@@ -1,0 +1,21 @@
+<form action="/profile" method="post" enctype="multipart/form-data">
+  <input type="file" name="avatar" />
+</form>
+
+{
+const form = new FormData();
+      form.append('image', data);
+
+      const res = await axios.post('http://localhost:4000/addPic', form);
+}
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './my-uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage }).single('image')
